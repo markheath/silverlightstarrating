@@ -17,52 +17,27 @@ namespace SilverlightStarRatingControl
 {
     public partial class StarRatingControl : UserControl
     {
-        private List<Path> starOutlines;
-        private List<Path> starFills;
-        private List<Path> starHalfFills;
+        private List<Star> stars;
         private bool isHovering;
 
         public StarRatingControl()
         {
             InitializeComponent();
 
-            starOutlines = new List<Path>();
-            starFills = new List<Path>();
-            starHalfFills = new List<Path>();
+            stars = new List<Star>();
             LayoutRoot.ColumnDefinitions.Clear();
             LayoutRoot.Children.Clear();
             for (int column = 0; column < NumberOfStars; column++)
             {
-                ColumnDefinition cd = new ColumnDefinition();                
-                cd.Width = GridLength.Auto;
+                ColumnDefinition cd = new ColumnDefinition();
+                cd.Width = new GridLength(34, GridUnitType.Star); // GridLength.Auto;
                 LayoutRoot.ColumnDefinitions.Add(cd);
 
-                string defaultNamespace = "xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"";
-                string starPath = "<Path " + defaultNamespace + " Data=\"M 2,12 l 10,0 l 5,-10 l 5,10 l 10,0 l -7,10 l 2,10 l -10,-5 l -10,5 l 2,-10 Z\" />";
-                string halfStarPath = "<Path " + defaultNamespace + " Data=\"M 2,12 l 10,0 l 5,-10 v 25 l -10,5 l 2,-10 Z\" />";
-
-                Path starFill = (Path)XamlReader.Load(starPath);
-                starFill.Fill = this.StarFillBrush;
-                starFill.SetValue(Grid.ColumnProperty, column);
-                starFill.Visibility = Visibility.Collapsed;
-                LayoutRoot.Children.Add(starFill);
-                this.starFills.Add(starFill);
-
-                Path halfStarFill = (Path)XamlReader.Load(halfStarPath);
-                halfStarFill.Fill = this.StarFillBrush;
-                halfStarFill.SetValue(Grid.ColumnProperty, column);
-                halfStarFill.Visibility = Visibility.Collapsed;
-                LayoutRoot.Children.Add(halfStarFill);
-                this.starHalfFills.Add(halfStarFill);
-
-                Path starOutline = (Path)XamlReader.Load(starPath);
-
-                starOutline.Stroke = this.Foreground;
-                starOutline.StrokeThickness = 3;
-                starOutline.StrokeLineJoin = PenLineJoin.Round;
-                starOutline.SetValue(Grid.ColumnProperty, column);
-                this.starOutlines.Add(starOutline);
-                LayoutRoot.Children.Add(starOutline);
+                Star star = new Star();
+                star.StarFillBrush = this.StarFillBrush;
+                star.SetValue(Grid.ColumnProperty, column);
+                LayoutRoot.Children.Add(star);
+                this.stars.Add(star);
             }
 
             /*ColumnDefinition filler = new ColumnDefinition();
@@ -73,14 +48,6 @@ namespace SilverlightStarRatingControl
             this.MouseMove += new MouseEventHandler(StarRatingControl_MouseMove);
             this.MouseLeave += new MouseEventHandler(StarRatingControl_MouseLeave);
             this.MouseLeftButtonDown += new MouseButtonEventHandler(StarRatingControl_MouseLeftButtonDown);
-            this.SizeChanged += new SizeChangedEventHandler(StarRatingControl_SizeChanged);                
-        }
-
-        void StarRatingControl_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            double maxScaleY = e.NewSize.Height / 34;
-            double maxScaleX = e.NewSize.Width / 170;
-            this.scaleTransform.ScaleX = this.scaleTransform.ScaleY = Math.Min(maxScaleX, maxScaleY);
         }
 
         void StarRatingControl_MouseEnter(object sender, MouseEventArgs e)
@@ -247,22 +214,20 @@ namespace SilverlightStarRatingControl
             {
                 if (value >= (star + 1) * 2)
                 {
-                    starFills[star].Visibility = Visibility.Visible;
-                    starFills[star].Fill = fillBrush;
-                    starHalfFills[star].Visibility = Visibility.Collapsed;
+                    stars[star].StarFillBrush = fillBrush;
+                    stars[star].HalfFillBrush = null;
                 }
                 else if (value >= 1 + star * 2)
                 {
-                    starFills[star].Visibility = Visibility.Collapsed;
-                    starHalfFills[star].Visibility = Visibility.Visible;
-                    starHalfFills[star].Fill = fillBrush;
+                    stars[star].StarFillBrush = null;
+                    stars[star].HalfFillBrush = fillBrush;
                 }
                 else
                 {
-                    starFills[star].Visibility = Visibility.Collapsed;
-                    starHalfFills[star].Visibility = Visibility.Collapsed;
+                    stars[star].StarFillBrush = null;
+                    stars[star].HalfFillBrush = null;
                 }
-                starOutlines[star].Stroke = (IsHovering) ? new SolidColorBrush(Color.FromArgb(0xff,0x80,0x80,0x80)) : this.Foreground;
+                stars[star].Foreground = (IsHovering) ? new SolidColorBrush(Color.FromArgb(0xff,0x80,0x80,0x80)) : this.Foreground;
             }
         }
     }
