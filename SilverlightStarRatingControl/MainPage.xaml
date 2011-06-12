@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:my="clr-namespace:SilverlightStarRatingControl"
-             xmlns:star="clr-namespace:SilverlightStarRatingControl;assembly=StarRating"
+             xmlns:star="clr-namespace:MarkHeath.StarRating;assembly=MarkHeath.StarRating"
     mc:Ignorable="d"
     d:DesignHeight="430" d:DesignWidth="592">
 
