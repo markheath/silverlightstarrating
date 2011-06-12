@@ -12,9 +12,7 @@
             <RowDefinition Height="66*" />
             <RowDefinition Height="234*" />
         </Grid.RowDefinitions>
-        <my:StarRatingControl Foreground="ForestGreen" />
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Background="Beige">
-            <Ellipse Width="20" Fill="Blue" />
-        </StackPanel>
+        <my:StarRatingControl Foreground="ForestGreen" Margin="57,12,173,20" />
+        <my:StarRatingControl Grid.Row="1" HorizontalAlignment="Left" Margin="144,109,0,0" x:Name="starRatingControl1" VerticalAlignment="Top" Height="58" Width="224" />
     </Grid>
 </UserControl>
