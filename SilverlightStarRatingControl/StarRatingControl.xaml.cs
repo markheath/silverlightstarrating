@@ -57,7 +57,7 @@ namespace SilverlightStarRatingControl
 
                 Path starOutline = (Path)XamlReader.Load(starPath);
 
-                starOutline.Stroke = new SolidColorBrush(Color.FromArgb(0xff, 0x40, 0x40, 0x80));
+                starOutline.Stroke = this.Foreground;
                 starOutline.StrokeThickness = 3;
                 starOutline.StrokeLineJoin = PenLineJoin.Round;
                 starOutline.SetValue(Grid.ColumnProperty, column);
@@ -69,7 +69,7 @@ namespace SilverlightStarRatingControl
             this.MouseMove += new MouseEventHandler(StarRatingControl_MouseMove);
             this.MouseLeave += new MouseEventHandler(StarRatingControl_MouseLeave);
             this.MouseLeftButtonDown += new MouseButtonEventHandler(StarRatingControl_MouseLeftButtonDown);
-            this.SizeChanged += new SizeChangedEventHandler(StarRatingControl_SizeChanged);
+            this.SizeChanged += new SizeChangedEventHandler(StarRatingControl_SizeChanged);                
         }
 
         void StarRatingControl_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -259,6 +259,7 @@ namespace SilverlightStarRatingControl
                     starFills[star].Visibility = Visibility.Collapsed;
                     starHalfFills[star].Visibility = Visibility.Collapsed;
                 }
+                starOutlines[star].Stroke = (IsHovering) ? new SolidColorBrush(Color.FromArgb(0xff,0x80,0x80,0x80)) : this.Foreground;
             }
         }
     }
