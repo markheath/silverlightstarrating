@@ -13,7 +13,7 @@ using System.Windows.Markup;
 using System.Windows.Data;
 using System.Diagnostics;
 
-namespace SilverlightStarRatingControl
+namespace MarkHeath.StarRating
 {
     public partial class StarRatingControl : UserControl
     {
@@ -227,7 +227,7 @@ namespace SilverlightStarRatingControl
                     stars[star].StarFillBrush = null;
                     stars[star].HalfFillBrush = null;
                 }
-                stars[star].Foreground = (IsHovering) ? new SolidColorBrush(Color.FromArgb(0xff,0x80,0x80,0x80)) : this.Foreground;
+                stars[star].Foreground = (IsHovering) ? new SolidColorBrush(Color.FromArgb(0xff, 0x80, 0x80, 0x80)) : this.Foreground;
             }
         }
     }
