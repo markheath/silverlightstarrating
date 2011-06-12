@@ -89,7 +89,8 @@ namespace SilverlightStarRatingControl
         {
             int maxRating = NumberOfStars * 2;
             double starRatingWidth = this.LayoutRoot.ColumnDefinitions[0].ActualWidth * NumberOfStars;
-            double value = 0.5 + (mousePos.X / starRatingWidth) * (maxRating);
+            double percent = mousePos.X / starRatingWidth;
+            double value = 0.75 + (percent * maxRating);
             int rating = (int)value;
             if (rating < 0) rating = 0;
             if (rating > maxRating) rating = maxRating;
@@ -221,7 +222,7 @@ namespace SilverlightStarRatingControl
         #region HoverFillBrushProperty
         public static readonly DependencyProperty HoverFillBrushProperty = DependencyProperty.Register(
     "HoverFillBrush", typeof(Brush),
-    typeof(StarRatingControl), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xFF, 0xCF, 0xCF, 0)),
+    typeof(StarRatingControl), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFF, 0x80)),
         new PropertyChangedCallback(HoverFillBrushChanged)));
 
         public Brush HoverFillBrush
