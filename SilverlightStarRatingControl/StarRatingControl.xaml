@@ -7,13 +7,13 @@
     d:DesignHeight="34" d:DesignWidth="170"
     Width="170" Height="34"
     Foreground="#404080">
-    <UserControl.RenderTransform>
-        <ScaleTransform x:Name="scaleTransform" CenterY="17" />
-    </UserControl.RenderTransform>
+
 
     <!-- Background MUST be set to something (even if transparent) for us 
     to pick up all the mouse events -->
     <Grid x:Name="LayoutRoot" Background="#00FFFFFF">
-
+        <Grid.RenderTransform>
+            <ScaleTransform x:Name="scaleTransform" CenterY="17" />
+        </Grid.RenderTransform>
     </Grid>
 </UserControl>

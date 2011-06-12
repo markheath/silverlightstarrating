@@ -17,6 +17,14 @@ namespace SilverlightStarRatingControl
         public Star()
         {
             InitializeComponent();
+            this.SizeChanged += new SizeChangedEventHandler(Star_SizeChanged);
+        }
+
+        void Star_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            double scaleX = e.NewSize.Width / 34;
+            double scaleY = e.NewSize.Height / 34;
+            scaleTransform.ScaleX = scaleTransform.ScaleY = Math.Min(scaleX, scaleY);
         }
     }
 }
