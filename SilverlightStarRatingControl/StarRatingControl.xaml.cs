@@ -17,9 +17,9 @@ namespace SilverlightStarRatingControl
 {
     public partial class StarRatingControl : UserControl
     {
-        List<Path> starOutlines;
-        List<Path> starFills;
-        List<Path> starHalfFills;
+        private List<Path> starOutlines;
+        private List<Path> starFills;
+        private List<Path> starHalfFills;
 
         public StarRatingControl()
         {
@@ -41,14 +41,14 @@ namespace SilverlightStarRatingControl
                 string halfStarPath = "<Path " + defaultNamespace + " Data=\"M 2,12 l 10,0 l 5,-10 v 25 l -10,5 l 2,-10 Z\" />";
 
                 Path starFill = (Path)XamlReader.Load(starPath);
-                starFill.Fill = new SolidColorBrush(Color.FromArgb(0xff, 0xff, 0xff, 0));
+                starFill.Fill = this.StarFillBrush;
                 starFill.SetValue(Grid.ColumnProperty, column);
                 starFill.Visibility = Visibility.Collapsed;
                 LayoutRoot.Children.Add(starFill);
                 this.starFills.Add(starFill);
                 
                 Path halfStarFill = (Path)XamlReader.Load(halfStarPath);
-                halfStarFill.Fill = new SolidColorBrush(Color.FromArgb(0xff, 0, 0xff, 0));
+                halfStarFill.Fill = this.StarFillBrush;
                 halfStarFill.SetValue(Grid.ColumnProperty, column);
                 halfStarFill.Visibility = Visibility.Collapsed;
                 LayoutRoot.Children.Add(halfStarFill);
@@ -56,31 +56,47 @@ namespace SilverlightStarRatingControl
 
                 Path starOutline = (Path)XamlReader.Load(starPath);
 
-                //Binding b = new Binding();
-                //b.Path = new PropertyPath(UserControl.ForegroundProperty);
-                //b.Source = this;
-                //BindingOperations.SetBinding(star, Path.StrokeProperty, b);
-                //Binding b = new Binding("Foreground") { ElementName="Root" };
-                //BindingOperations.SetBinding(star, Path.StrokeProperty, b);
                 starOutline.Stroke = new SolidColorBrush(Color.FromArgb(0xff, 0x40, 0x40, 0x80));
                 starOutline.StrokeThickness = 3;
                 starOutline.StrokeLineJoin = PenLineJoin.Round;                
                 starOutline.SetValue(Grid.ColumnProperty, column);
                 this.starOutlines.Add(starOutline);
-                LayoutRoot.Children.Add(starOutline);
-
-                
+                LayoutRoot.Children.Add(starOutline);                
             }
+
+            this.MouseEnter += new MouseEventHandler(StarRatingControl_MouseEnter);
             this.MouseMove += new MouseEventHandler(StarRatingControl_MouseMove);
+            this.MouseLeave += new MouseEventHandler(StarRatingControl_MouseLeave);
+            this.MouseLeftButtonDown += new MouseButtonEventHandler(StarRatingControl_MouseLeftButtonDown);
+        }
+
+        void StarRatingControl_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Debug.WriteLine("MOUSE ENTER");
+        }
+
+        private int GetRatingFromPosition(Point mousePos)
+        {
+            double starRatingWidth = this.LayoutRoot.ColumnDefinitions[0].ActualWidth * NumberOfStars;
+            double value = 0.5 + (mousePos.X / starRatingWidth) * (NumberOfStars * 2);
+            return (int)value;
+        }
+
+        void StarRatingControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.Rating = GetRatingFromPosition(e.GetPosition(this.LayoutRoot));            
+        }
+
+        void StarRatingControl_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Debug.WriteLine("Lost mouse");
+            DrawStarRating(Rating, this.StarFillBrush);
         }
 
         void StarRatingControl_MouseMove(object sender, MouseEventArgs e)
         {
             var mousePos = e.GetPosition(LayoutRoot);
-
-            double starRatingWidth = this.LayoutRoot.ColumnDefinitions[0].ActualWidth * NumberOfStars;
-            double value = 0.5 + (mousePos.X / starRatingWidth) * (NumberOfStars * 2);
-            this.Rating = (int)value;
+            this.HoverRating = GetRatingFromPosition(e.GetPosition(this.LayoutRoot));            
         }
 
         #region NumberOfStarsProperty
@@ -114,11 +130,65 @@ namespace SilverlightStarRatingControl
         private static void OnRatingChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
             var src = (StarRatingControl)sender;
-            src.DrawStarRating((int)args.NewValue);
+            src.DrawStarRating((int)args.NewValue, src.StarFillBrush);
         }
         #endregion
 
-        private void DrawStarRating(int value)
+        #region HoverRatingProperty
+        public static readonly DependencyProperty HoverRatingProperty = DependencyProperty.Register(
+            "HoverRating", typeof(int),
+            typeof(StarRatingControl), new PropertyMetadata(0, new PropertyChangedCallback(OnHoverRatingChanged)));
+
+        public int HoverRating
+        {
+            get { return (int)GetValue(HoverRatingProperty); }
+            set { SetValue(HoverRatingProperty, value); }
+        }
+
+        private static void OnHoverRatingChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+        {
+            var src = (StarRatingControl)sender;
+            src.DrawStarRating((int)args.NewValue, src.HoverFillBrush);
+        }
+        #endregion
+
+        #region StarFillBrushProperty
+        public static readonly DependencyProperty StarFillBrushProperty = DependencyProperty.Register(
+    "StarFillBrush", typeof(Brush),
+    typeof(StarRatingControl), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xFF,0xFF,0xFF,0)),
+        new PropertyChangedCallback(StarFillBrushChanged)));
+
+        public Brush StarFillBrush
+        {
+            get { return (Brush)GetValue(StarFillBrushProperty); }
+            set { SetValue(StarFillBrushProperty, value); }
+        }
+
+        private static void StarFillBrushChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+        {
+
+        }
+        #endregion
+
+        #region HoverFillBrushProperty
+        public static readonly DependencyProperty HoverFillBrushProperty = DependencyProperty.Register(
+    "HoverFillBrush", typeof(Brush),
+    typeof(StarRatingControl), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xFF, 0xCF, 0xCF, 0)),
+        new PropertyChangedCallback(HoverFillBrushChanged)));
+
+        public Brush HoverFillBrush
+        {
+            get { return (Brush)GetValue(HoverFillBrushProperty); }
+            set { SetValue(HoverFillBrushProperty, value); }
+        }
+
+        private static void HoverFillBrushChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+        {
+
+        }
+        #endregion
+
+        private void DrawStarRating(int value, Brush fillBrush)
         {            
             Debug.WriteLine("Value = {0}", value);
             for (int star = 0; star < NumberOfStars; star++)
@@ -126,12 +196,14 @@ namespace SilverlightStarRatingControl
                 if (value >= (star + 1) * 2)
                 {
                     starFills[star].Visibility = Visibility.Visible;
+                    starFills[star].Fill = fillBrush;
                     starHalfFills[star].Visibility = Visibility.Collapsed;
                 }
                 else if (value >= 1 + star * 2)
                 {
                     starFills[star].Visibility = Visibility.Collapsed;
                     starHalfFills[star].Visibility = Visibility.Visible;
+                    starHalfFills[star].Fill = fillBrush;
                 }
                 else
                 {
