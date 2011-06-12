@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverlightStarRatingContro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverlightStarRatingControl.Web", "SilverlightStarRatingControl.Web\SilverlightStarRatingControl.Web.csproj", "{1F2D4594-2C4C-4E0E-816F-1D4AFB2E57DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarRating", "StarRating\StarRating.csproj", "{F4908EEC-8D01-4DD6-B86A-E9CB5AF99CF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{1F2D4594-2C4C-4E0E-816F-1D4AFB2E57DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F2D4594-2C4C-4E0E-816F-1D4AFB2E57DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F2D4594-2C4C-4E0E-816F-1D4AFB2E57DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4908EEC-8D01-4DD6-B86A-E9CB5AF99CF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4908EEC-8D01-4DD6-B86A-E9CB5AF99CF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4908EEC-8D01-4DD6-B86A-E9CB5AF99CF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4908EEC-8D01-4DD6-B86A-E9CB5AF99CF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
