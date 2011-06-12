@@ -8,7 +8,13 @@
     d:DesignHeight="300" d:DesignWidth="400">
 
     <Grid x:Name="LayoutRoot" Background="White">
-        <my:StarRatingControl Foreground="ForestGreen" Background="AliceBlue" />
-        <my:BindToPropertyTest Foreground="ForestGreen" Margin="50" /> 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="66*" />
+            <RowDefinition Height="234*" />
+        </Grid.RowDefinitions>
+        <my:StarRatingControl Foreground="ForestGreen" />
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Background="Beige">
+            <Ellipse Width="20" Fill="Blue" />
+        </StackPanel>
     </Grid>
 </UserControl>
