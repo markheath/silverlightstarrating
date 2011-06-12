@@ -47,7 +47,7 @@ namespace SilverlightStarRatingControl
                 starFill.Visibility = Visibility.Collapsed;
                 LayoutRoot.Children.Add(starFill);
                 this.starFills.Add(starFill);
-                
+
                 Path halfStarFill = (Path)XamlReader.Load(halfStarPath);
                 halfStarFill.Fill = this.StarFillBrush;
                 halfStarFill.SetValue(Grid.ColumnProperty, column);
@@ -59,10 +59,10 @@ namespace SilverlightStarRatingControl
 
                 starOutline.Stroke = new SolidColorBrush(Color.FromArgb(0xff, 0x40, 0x40, 0x80));
                 starOutline.StrokeThickness = 3;
-                starOutline.StrokeLineJoin = PenLineJoin.Round;                
+                starOutline.StrokeLineJoin = PenLineJoin.Round;
                 starOutline.SetValue(Grid.ColumnProperty, column);
                 this.starOutlines.Add(starOutline);
-                LayoutRoot.Children.Add(starOutline);                
+                LayoutRoot.Children.Add(starOutline);
             }
 
             this.MouseEnter += new MouseEventHandler(StarRatingControl_MouseEnter);
@@ -73,7 +73,7 @@ namespace SilverlightStarRatingControl
 
         void StarRatingControl_MouseEnter(object sender, MouseEventArgs e)
         {
-            Debug.WriteLine("MOUSE ENTER");
+            e.GetPosition(this.LayoutRoot);
         }
 
         private int GetRatingFromPosition(Point mousePos)
@@ -89,22 +89,53 @@ namespace SilverlightStarRatingControl
 
         void StarRatingControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.Rating = GetRatingFromPosition(e.GetPosition(this.LayoutRoot));            
+            this.Rating = GetRatingFromPosition(e.GetPosition(this.LayoutRoot));
         }
 
         void StarRatingControl_MouseLeave(object sender, MouseEventArgs e)
         {
-            isHovering = false;
-            DrawStarRating(Rating, this.StarFillBrush);
+            IsHovering = false;
+        }
+
+        private bool IsInBounds(Point p)
+        {
+            double maxX = this.LayoutRoot.ColumnDefinitions[0].ActualWidth * NumberOfStars;
+            double maxY = this.LayoutRoot.ColumnDefinitions[0].ActualWidth; // actual height of a star doesn't give us the right thing
+            return (p.Y >= 0) &&
+                (p.Y < maxY) &&
+                (p.X >= 0) &&
+                (p.X < maxX);
         }
 
         void StarRatingControl_MouseMove(object sender, MouseEventArgs e)
         {
             var mousePos = e.GetPosition(LayoutRoot);
-            if (mousePos.Y < this.starOutlines[0].ActualHeight)
+            this.IsHovering = IsInBounds(mousePos);
+            if (this.IsHovering)
             {
                 this.HoverRating = GetRatingFromPosition(e.GetPosition(this.LayoutRoot));
             }
+            else
+            {
+                Debug.WriteLine("Point not over stars {0}", mousePos);
+            }
+        }
+
+        private bool IsHovering
+        {
+            get { return isHovering; }
+            set
+            {
+                if (isHovering != value)
+                {
+                    this.isHovering = value;
+                    if (!isHovering)
+                    {
+                        DrawStarRating(Rating, this.StarFillBrush);
+                    }
+                }
+            }
+
         }
 
         #region NumberOfStarsProperty
@@ -163,7 +194,7 @@ namespace SilverlightStarRatingControl
         #region StarFillBrushProperty
         public static readonly DependencyProperty StarFillBrushProperty = DependencyProperty.Register(
     "StarFillBrush", typeof(Brush),
-    typeof(StarRatingControl), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xFF,0xFF,0xFF,0)),
+    typeof(StarRatingControl), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFF, 0)),
         new PropertyChangedCallback(StarFillBrushChanged)));
 
         public Brush StarFillBrush
@@ -197,7 +228,7 @@ namespace SilverlightStarRatingControl
         #endregion
 
         private void DrawStarRating(int value, Brush fillBrush)
-        {            
+        {
             Debug.WriteLine("Value = {0}", value);
             for (int star = 0; star < NumberOfStars; star++)
             {
