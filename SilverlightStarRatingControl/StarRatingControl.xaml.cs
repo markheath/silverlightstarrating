@@ -20,6 +20,7 @@ namespace SilverlightStarRatingControl
         private List<Path> starOutlines;
         private List<Path> starFills;
         private List<Path> starHalfFills;
+        private bool isHovering;
 
         public StarRatingControl()
         {
@@ -77,9 +78,13 @@ namespace SilverlightStarRatingControl
 
         private int GetRatingFromPosition(Point mousePos)
         {
+            int maxRating = NumberOfStars * 2;
             double starRatingWidth = this.LayoutRoot.ColumnDefinitions[0].ActualWidth * NumberOfStars;
-            double value = 0.5 + (mousePos.X / starRatingWidth) * (NumberOfStars * 2);
-            return (int)value;
+            double value = 0.5 + (mousePos.X / starRatingWidth) * (maxRating);
+            int rating = (int)value;
+            if (rating < 0) rating = 0;
+            if (rating > maxRating) rating = maxRating;
+            return rating;
         }
 
         void StarRatingControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -89,14 +94,17 @@ namespace SilverlightStarRatingControl
 
         void StarRatingControl_MouseLeave(object sender, MouseEventArgs e)
         {
-            Debug.WriteLine("Lost mouse");
+            isHovering = false;
             DrawStarRating(Rating, this.StarFillBrush);
         }
 
         void StarRatingControl_MouseMove(object sender, MouseEventArgs e)
         {
             var mousePos = e.GetPosition(LayoutRoot);
-            this.HoverRating = GetRatingFromPosition(e.GetPosition(this.LayoutRoot));            
+            if (mousePos.Y < this.starOutlines[0].ActualHeight)
+            {
+                this.HoverRating = GetRatingFromPosition(e.GetPosition(this.LayoutRoot));
+            }
         }
 
         #region NumberOfStarsProperty

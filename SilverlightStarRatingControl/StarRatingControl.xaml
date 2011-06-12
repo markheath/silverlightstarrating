@@ -8,7 +8,7 @@
     
     <!-- Background MUST be set to something (even if transparent) for us
     to pick up all the mouse events -->
-    <Grid x:Name="LayoutRoot" Width="Auto" Background="#00FFFFFF">
+    <Grid x:Name="LayoutRoot" Background="#00FFFFFF">
 
     </Grid>
 </UserControl>
