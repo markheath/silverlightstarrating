@@ -5,18 +5,28 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:my="clr-namespace:SilverlightStarRatingControl"
     mc:Ignorable="d"
-    d:DesignHeight="300" d:DesignWidth="400">
+    d:DesignHeight="430" d:DesignWidth="592">
 
-    <Grid x:Name="LayoutRoot" Background="White">
+    <Grid x:Name="LayoutRoot" Background="White" Height="426" Width="590">
         <Grid.RowDefinitions>
             <RowDefinition Height="66*" />
             <RowDefinition Height="234*" />
         </Grid.RowDefinitions>
-        <my:StarRatingControl Foreground="ForestGreen" Margin="57,12,157,11" />
-        <my:StarRatingControl Grid.Row="1" Margin="46,158,0,0" x:Name="starRatingControl1" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="119" />
+        <my:StarRatingControl Foreground="ForestGreen" Margin="26,12,0,0" HorizontalAlignment="Left" Width="170" Height="35" VerticalAlignment="Top" />
+        <my:StarRatingControl Grid.Row="1" Margin="46,225,0,0" x:Name="starRatingControl1" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="79" />
         <my:Star Grid.Row="1" HorizontalAlignment="Left" Margin="26,15,0,0" x:Name="star1" VerticalAlignment="Top" Height="53" Width="62" />
         <my:StarRatingControl Grid.Row="1" Height="67" HorizontalAlignment="Left" Margin="46,71,0,0" x:Name="starRatingControl2" VerticalAlignment="Top" Width="328" />
         <my:Star Grid.Row="1" Height="34" HorizontalAlignment="Left" Margin="118,15,0,0" x:Name="star2" VerticalAlignment="Top" Width="34" StarFillBrush="Red" Foreground="Blue" HalfFillBrush="Green" />
         <my:Star Grid.Row="1" Height="87" HorizontalAlignment="Left" Margin="292,135,0,0" x:Name="star3" VerticalAlignment="Top" Width="82" HalfFillBrush="{x:Null}" />
+        <Grid Grid.RowSpan="2" Height="100" HorizontalAlignment="Left" Margin="282,61,0,0" Name="grid1" VerticalAlignment="Top" Width="200">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <my:Star Grid.Row="1" HorizontalAlignment="Left" Margin="172,15,0,0" x:Name="star4" VerticalAlignment="Top" Height="34" Width="24" />
     </Grid>
 </UserControl>
