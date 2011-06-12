@@ -4,14 +4,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+             Width="34" Height="34"
     d:DesignHeight="34" d:DesignWidth="34" Foreground="#6060FF">
     <Grid x:Name="LayoutRoot">
-
+        <Grid.RenderTransform>
+            <ScaleTransform x:Name="scaleTransform" />
+        </Grid.RenderTransform>
         <Path x:Name="Fill" Fill="#D0D0D0" 
     Data="M 2,12 l 10,0 l 5,-10 l 5,10 l 10,0 l -7,10 l 2,10 l -10,-5 l -10,5 l 2,-10 Z" />
 
         <Path x:Name="HalfFill" Fill="#FFFF80" 
-    Data="M 2,12 l 10,0 l 5,-10 v 25 l -10,5 l 2,-10 Z" />
+    Data="M 2,12 l 10,0 l 5,-10 v 25 l -10,5 l 2,-10 Z M 34,34" />
 
         <Path x:Name="Outline" Stroke="{Binding Parent.Foreground, ElementName=LayoutRoot}"     
     StrokeThickness="2" 
