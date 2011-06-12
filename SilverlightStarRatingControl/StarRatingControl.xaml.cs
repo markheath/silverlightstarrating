@@ -78,12 +78,9 @@ namespace SilverlightStarRatingControl
 
         void StarRatingControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (!double.IsNaN(this.ActualHeight) && this.ActualHeight != 0)
-            {
-                double maxScaleY = this.ActualHeight / 34;
-                double maxScaleX = this.ActualWidth / 170;
-                this.scaleTransform.ScaleX = this.scaleTransform.ScaleY = Math.Min(maxScaleX, maxScaleY);
-            }
+            double maxScaleY = e.NewSize.Height / 34;
+            double maxScaleX = e.NewSize.Width / 170;
+            this.scaleTransform.ScaleX = this.scaleTransform.ScaleY = Math.Min(maxScaleX, maxScaleY);
         }
 
         void StarRatingControl_MouseEnter(object sender, MouseEventArgs e)

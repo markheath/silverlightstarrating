@@ -10,10 +10,10 @@
         <Grid.RenderTransform>
             <ScaleTransform x:Name="scaleTransform" />
         </Grid.RenderTransform>
-        <Path x:Name="Fill" Fill="#D0D0D0" 
+        <Path x:Name="Fill" Fill="{Binding Parent.StarFillBrush, ElementName=LayoutRoot}" 
     Data="M 2,12 l 10,0 l 5,-10 l 5,10 l 10,0 l -7,10 l 2,10 l -10,-5 l -10,5 l 2,-10 Z" />
 
-        <Path x:Name="HalfFill" Fill="#FFFF80" 
+        <Path x:Name="HalfFill" Fill="{Binding Parent.HalfFillBrush, ElementName=LayoutRoot}"
     Data="M 2,12 l 10,0 l 5,-10 v 25 l -10,5 l 2,-10 Z M 34,34" />
 
         <Path x:Name="Outline" Stroke="{Binding Parent.Foreground, ElementName=LayoutRoot}"     
