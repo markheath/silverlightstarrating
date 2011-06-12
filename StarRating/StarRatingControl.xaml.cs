@@ -24,6 +24,22 @@ namespace MarkHeath.StarRating
         {
             InitializeComponent();
 
+            CreateStars();
+
+            
+
+            /*ColumnDefinition filler = new ColumnDefinition();
+            filler.Width = new GridLength(1, GridUnitType.Star);
+            this.LayoutRoot.ColumnDefinitions.Add(filler);
+            this.LayoutRoot.ShowGridLines = true;*/
+            this.MouseEnter += new MouseEventHandler(StarRatingControl_MouseEnter);
+            this.MouseMove += new MouseEventHandler(StarRatingControl_MouseMove);
+            this.MouseLeave += new MouseEventHandler(StarRatingControl_MouseLeave);
+            this.MouseLeftButtonDown += new MouseButtonEventHandler(StarRatingControl_MouseLeftButtonDown);
+        }
+
+        private void CreateStars()
+        {
             stars = new List<Star>();
             LayoutRoot.ColumnDefinitions.Clear();
             LayoutRoot.Children.Clear();
@@ -39,20 +55,12 @@ namespace MarkHeath.StarRating
                 LayoutRoot.Children.Add(star);
                 this.stars.Add(star);
             }
-
-            /*ColumnDefinition filler = new ColumnDefinition();
-            filler.Width = new GridLength(1, GridUnitType.Star);
-            this.LayoutRoot.ColumnDefinitions.Add(filler);
-            this.LayoutRoot.ShowGridLines = true;*/
-            this.MouseEnter += new MouseEventHandler(StarRatingControl_MouseEnter);
-            this.MouseMove += new MouseEventHandler(StarRatingControl_MouseMove);
-            this.MouseLeave += new MouseEventHandler(StarRatingControl_MouseLeave);
-            this.MouseLeftButtonDown += new MouseButtonEventHandler(StarRatingControl_MouseLeftButtonDown);
         }
 
         void StarRatingControl_MouseEnter(object sender, MouseEventArgs e)
         {
-            e.GetPosition(this.LayoutRoot);
+            var mousePos = e.GetPosition(this.LayoutRoot);
+            HandleMouseOver(mousePos);
         }
 
         private int GetRatingFromPosition(Point mousePos)
@@ -90,15 +98,20 @@ namespace MarkHeath.StarRating
         void StarRatingControl_MouseMove(object sender, MouseEventArgs e)
         {
             var mousePos = e.GetPosition(LayoutRoot);
+            HandleMouseOver(mousePos);
+        }
+
+        private void HandleMouseOver(Point mousePos)
+        {
             this.IsHovering = IsInBounds(mousePos);
             if (this.IsHovering)
             {
-                this.HoverRating = GetRatingFromPosition(e.GetPosition(this.LayoutRoot));
+                this.HoverRating = GetRatingFromPosition(mousePos);
             }
-            else
+            /*else
             {
                 Debug.WriteLine("Point not over stars {0}", mousePos);
-            }
+            }*/
         }
 
         private bool IsHovering
@@ -132,6 +145,9 @@ namespace MarkHeath.StarRating
 
         private static void OnNumberOfStarsChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
+            StarRatingControl starRating = (StarRatingControl)sender;
+            starRating.CreateStars();
+            starRating.RefreshStarRating();
         }
         #endregion
 
@@ -185,7 +201,8 @@ namespace MarkHeath.StarRating
 
         private static void StarFillBrushChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
-
+            var starRating = (StarRatingControl)sender;
+            starRating.RefreshStarRating();
         }
         #endregion
 
@@ -203,9 +220,22 @@ namespace MarkHeath.StarRating
 
         private static void HoverFillBrushChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
-
+            var starRating = (StarRatingControl)sender;
+            starRating.RefreshStarRating();
         }
         #endregion
+
+        private void RefreshStarRating()
+        {
+            if (isHovering)
+            {
+                DrawStarRating(this.HoverRating, this.HoverFillBrush);
+            }
+            else
+            {
+                DrawStarRating(this.Rating, this.StarFillBrush);
+            }
+        }
 
         private void DrawStarRating(int value, Brush fillBrush)
         {
