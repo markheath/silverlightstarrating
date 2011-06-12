@@ -33,7 +33,7 @@ namespace SilverlightStarRatingControl
             LayoutRoot.Children.Clear();
             for (int column = 0; column < NumberOfStars; column++)
             {
-                ColumnDefinition cd = new ColumnDefinition();
+                ColumnDefinition cd = new ColumnDefinition();                
                 cd.Width = GridLength.Auto;
                 LayoutRoot.ColumnDefinitions.Add(cd);
 
@@ -69,6 +69,15 @@ namespace SilverlightStarRatingControl
             this.MouseMove += new MouseEventHandler(StarRatingControl_MouseMove);
             this.MouseLeave += new MouseEventHandler(StarRatingControl_MouseLeave);
             this.MouseLeftButtonDown += new MouseButtonEventHandler(StarRatingControl_MouseLeftButtonDown);
+            this.SizeChanged += new SizeChangedEventHandler(StarRatingControl_SizeChanged);
+        }
+
+        void StarRatingControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (!double.IsNaN(this.ActualHeight) && this.ActualHeight != 0)
+            {
+                this.scaleTransform.ScaleX = this.scaleTransform.ScaleY = this.ActualHeight / 34;
+            }
         }
 
         void StarRatingControl_MouseEnter(object sender, MouseEventArgs e)

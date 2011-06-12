@@ -4,11 +4,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300" d:DesignWidth="400">
+    d:DesignHeight="34" d:DesignWidth="170">
     
     <!-- Background MUST be set to something (even if transparent) for us
     to pick up all the mouse events -->
-    <Grid x:Name="LayoutRoot" Background="#00FFFFFF">
+    <Grid x:Name="LayoutRoot" Background="#00FFFFFF" Width="170" Height="34">
+        <Grid.RenderTransform>
+            <ScaleTransform x:Name="scaleTransform" />
+        </Grid.RenderTransform>
 
     </Grid>
 </UserControl>
