@@ -76,30 +76,11 @@ namespace SilverlightStarRatingControl
 
         void StarRatingControl_MouseMove(object sender, MouseEventArgs e)
         {
-            var mousePos = e.GetPosition(this);
+            var mousePos = e.GetPosition(LayoutRoot);
 
-            double starRatingWidth = this.LayoutRoot.ColumnDefinitions.First().ActualWidth * NumberOfStars;
-            double value = (mousePos.X / starRatingWidth) * (NumberOfStars * 2);
-            Debug.WriteLine("Value = {0}", value);
-            for (int star = 0; star < NumberOfStars; star++)
-            {
-                if (value >= (star + 1) * 2)
-                {
-                    starFills[star].Visibility = Visibility.Visible;
-                    starHalfFills[star].Visibility = Visibility.Collapsed;
-                }
-                else if (value > 1 + star * 2)
-                {
-                    starFills[star].Visibility = Visibility.Collapsed;
-                    starHalfFills[star].Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    starFills[star].Visibility = Visibility.Collapsed;
-                    starHalfFills[star].Visibility = Visibility.Collapsed;
-                }
-
-            }
+            double starRatingWidth = this.LayoutRoot.ColumnDefinitions[0].ActualWidth * NumberOfStars;
+            double value = 0.5 + (mousePos.X / starRatingWidth) * (NumberOfStars * 2);
+            this.Rating = (int)value;
         }
 
         #region NumberOfStarsProperty
@@ -120,10 +101,9 @@ namespace SilverlightStarRatingControl
         #endregion
 
         #region RatingProperty
-        public static readonly DependencyProperty RatingProperty =
-    DependencyProperty.Register(
-        "Rating", typeof(int),
-        typeof(StarRatingControl), new PropertyMetadata(0, new PropertyChangedCallback(OnRatingChanged)));
+        public static readonly DependencyProperty RatingProperty = DependencyProperty.Register(
+            "Rating", typeof(int),
+            typeof(StarRatingControl), new PropertyMetadata(0, new PropertyChangedCallback(OnRatingChanged)));
 
         public int Rating
         {
@@ -133,10 +113,32 @@ namespace SilverlightStarRatingControl
 
         private static void OnRatingChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
-
+            var src = (StarRatingControl)sender;
+            src.DrawStarRating((int)args.NewValue);
         }
         #endregion
 
-
+        private void DrawStarRating(int value)
+        {            
+            Debug.WriteLine("Value = {0}", value);
+            for (int star = 0; star < NumberOfStars; star++)
+            {
+                if (value >= (star + 1) * 2)
+                {
+                    starFills[star].Visibility = Visibility.Visible;
+                    starHalfFills[star].Visibility = Visibility.Collapsed;
+                }
+                else if (value >= 1 + star * 2)
+                {
+                    starFills[star].Visibility = Visibility.Collapsed;
+                    starHalfFills[star].Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    starFills[star].Visibility = Visibility.Collapsed;
+                    starHalfFills[star].Visibility = Visibility.Collapsed;
+                }
+            }
+        }
     }
 }
