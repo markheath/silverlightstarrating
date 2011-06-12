@@ -13,8 +13,10 @@
             <RowDefinition Height="234*" />
         </Grid.RowDefinitions>
         <my:StarRatingControl Foreground="ForestGreen" Margin="57,12,157,11" />
-        <my:StarRatingControl Grid.Row="1" Margin="74,132,112,32" x:Name="starRatingControl1" />
-        <my:Star Grid.Row="1" HorizontalAlignment="Left" Margin="46,35,0,0" x:Name="star1" VerticalAlignment="Top" Height="94" Width="88" />
-        <my:StarRatingControl Grid.Row="1" Height="42" HorizontalAlignment="Left" Margin="219,72,0,0" x:Name="starRatingControl2" VerticalAlignment="Top" Width="114" />
+        <my:StarRatingControl Grid.Row="1" Margin="74,132,170,60" x:Name="starRatingControl1" />
+        <my:Star Grid.Row="1" HorizontalAlignment="Left" Margin="46,35,0,0" x:Name="star1" VerticalAlignment="Top" Height="53" Width="62" />
+        <my:StarRatingControl Grid.Row="1" Height="41" HorizontalAlignment="Left" Margin="219,72,0,0" x:Name="starRatingControl2" VerticalAlignment="Top" Width="113" />
+        <my:Star Grid.Row="1" Height="34" HorizontalAlignment="Left" Margin="169,31,0,0" x:Name="star2" VerticalAlignment="Top" Width="34" StarFillBrush="Red" Foreground="Blue" HalfFillBrush="Green" />
+        <my:Star Grid.Row="1" Height="87" HorizontalAlignment="Left" Margin="292,135,0,0" x:Name="star3" VerticalAlignment="Top" Width="82" HalfFillBrush="{x:Null}" />
     </Grid>
 </UserControl>
