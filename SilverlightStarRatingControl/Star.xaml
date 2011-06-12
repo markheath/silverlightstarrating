@@ -4,11 +4,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="34" d:DesignWidth="34" Foreground="#6060FF">
-    <Grid x:Name="LayoutRoot">
-        <Grid.RenderTransform>
+    d:DesignHeight="34" d:DesignWidth="34" Foreground="#6060FF">    
+    <Canvas x:Name="LayoutRoot">
+        <Canvas.RenderTransform>
             <ScaleTransform x:Name="scaleTransform" />
-        </Grid.RenderTransform>
+        </Canvas.RenderTransform>        
         <Path x:Name="Fill" Fill="{Binding Parent.StarFillBrush, ElementName=LayoutRoot}" 
     Data="M 2,12 l 10,0 l 5,-10 l 5,10 l 10,0 l -7,10 l 2,10 l -10,-5 l -10,5 l 2,-10 Z" />
 
@@ -20,5 +20,5 @@
     StrokeLineJoin="Round"
     Data="M 2,12 l 10,0 l 5,-10 l 5,10 l 10,0 l -7,10 l 2,10 l -10,-5 l -10,5 l 2,-10 Z" />
     <!-- width and height of this star is 34-->
-    </Grid>
+    </Canvas>
 </UserControl>

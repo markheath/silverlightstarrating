@@ -6,7 +6,7 @@
     mc:Ignorable="d"
     d:DesignHeight="30" d:DesignWidth="30">
     
-    <Grid x:Name="LayoutRoot" Background="White">
+    <Grid x:Name="LayoutRoot" Background="Red">
         <!--<Rectangle Fill="{Binding Parent.Foreground, ElementName=LayoutRoot}" />-->
     </Grid>
 </UserControl>
