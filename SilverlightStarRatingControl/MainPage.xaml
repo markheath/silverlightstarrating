@@ -12,8 +12,9 @@
             <RowDefinition Height="66*" />
             <RowDefinition Height="234*" />
         </Grid.RowDefinitions>
-        <my:StarRatingControl Foreground="ForestGreen" Margin="57,12,173,20" />
-        <my:StarRatingControl Grid.Row="1" HorizontalAlignment="Left" Margin="144,109,0,0" x:Name="starRatingControl1" VerticalAlignment="Top" Height="58" Width="224" />
+        <my:StarRatingControl Foreground="ForestGreen" Margin="57,12,157,11" />
+        <my:StarRatingControl Grid.Row="1" Margin="74,132,140,56" x:Name="starRatingControl1" />
         <my:Star Grid.Row="1" HorizontalAlignment="Left" Margin="46,35,0,0" x:Name="star1" VerticalAlignment="Top" />
+        <my:StarRatingControl Grid.Row="1" Height="30" HorizontalAlignment="Left" Margin="219,72,0,0" x:Name="starRatingControl2" VerticalAlignment="Top" Width="126" />
     </Grid>
 </UserControl>

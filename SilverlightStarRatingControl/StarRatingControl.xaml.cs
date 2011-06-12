@@ -65,6 +65,10 @@ namespace SilverlightStarRatingControl
                 LayoutRoot.Children.Add(starOutline);
             }
 
+            /*ColumnDefinition filler = new ColumnDefinition();
+            filler.Width = new GridLength(1, GridUnitType.Star);
+            this.LayoutRoot.ColumnDefinitions.Add(filler);
+            this.LayoutRoot.ShowGridLines = true;*/
             this.MouseEnter += new MouseEventHandler(StarRatingControl_MouseEnter);
             this.MouseMove += new MouseEventHandler(StarRatingControl_MouseMove);
             this.MouseLeave += new MouseEventHandler(StarRatingControl_MouseLeave);
@@ -76,7 +80,9 @@ namespace SilverlightStarRatingControl
         {
             if (!double.IsNaN(this.ActualHeight) && this.ActualHeight != 0)
             {
-                this.scaleTransform.ScaleX = this.scaleTransform.ScaleY = this.ActualHeight / 34;
+                double maxScaleY = this.ActualHeight / 34;
+                double maxScaleX = this.ActualWidth / 170;
+                this.scaleTransform.ScaleX = this.scaleTransform.ScaleY = Math.Min(maxScaleX, maxScaleY);
             }
         }
 
@@ -239,7 +245,7 @@ namespace SilverlightStarRatingControl
 
         private void DrawStarRating(int value, Brush fillBrush)
         {
-            Debug.WriteLine("Value = {0}", value);
+            //Debug.WriteLine("Value = {0}", value);
             for (int star = 0; star < NumberOfStars; star++)
             {
                 if (value >= (star + 1) * 2)
