@@ -4,3 +4,4 @@ obj/
 [Bb]in/
 *.user
 ClientBin/
+*.docstates
