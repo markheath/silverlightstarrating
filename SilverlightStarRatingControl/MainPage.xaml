@@ -40,5 +40,7 @@
         <star:Star Grid.Row="6" Height="87" HorizontalAlignment="Left" Margin="68,0,0,0" x:Name="star3" VerticalAlignment="Bottom" Width="82" HalfFillBrush="{x:Null}" Grid.Column="1" />
         <star:Star Grid.Row="6" HorizontalAlignment="Left" Margin="196,0,0,-2" x:Name="star4" VerticalAlignment="Bottom" Height="34" Width="24" Grid.Column="1" />
         <star:Star Grid.Column="1" Grid.Row="6" Height="89" HorizontalAlignment="Left" Margin="248,11,0,0" Name="star5" VerticalAlignment="Top" Width="82" StrokeThickness="5" StarFillBrush="Bisque" />
+        <star:Star Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" Margin="336,11,0,0" Name="star6" VerticalAlignment="Top" StrokeThickness="1" Height="75" Width="72" />
+        <star:Star Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" Margin="426,0,0,0" Name="star7" VerticalAlignment="Top" Height="69" Width="64" Foreground="{x:Null}" StarFillBrush="Red" />
     </Grid>
 </UserControl>

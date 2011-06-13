@@ -10,15 +10,15 @@
             <ScaleTransform x:Name="scaleTransform" />
         </Canvas.RenderTransform>
         <Path x:Name="Fill" Fill="{Binding Parent.StarFillBrush, ElementName=LayoutRoot}" 
-    Data="M 2,12 l 10,0 l 5,-10 l 5,10 l 10,0 l -7,10 l 2,10 l -10,-5 l -10,5 l 2,-10 Z" />
+                Data="M 2,12 l 10,0 l 5,-10 l 5,10 l 10,0 l -7,10 l 2,10 l -10,-5 l -10,5 l 2,-10 Z" />
 
-        <Path x:Name="HalfFill" Fill="{Binding Parent.HalfFillBrush, ElementName=LayoutRoot}"
-    Data="M 2,12 l 10,0 l 5,-10 v 25 l -10,5 l 2,-10 Z M 34,34" />
+        <Path x:Name="HalfFill" Fill="{Binding Parent.HalfFillBrush, ElementName=LayoutRoot}"                
+                Data="M 2,12 l 10,0 l 5,-10 v 25 l -10,5 l 2,-10 Z M 34,34" />
 
         <Path x:Name="Outline" Stroke="{Binding Parent.Foreground, ElementName=LayoutRoot}"     
-    StrokeThickness="{Binding Parent.StrokeThickness, ElementName=LayoutRoot}" 
-    StrokeLineJoin="Round"
-    Data="M 2,12 l 10,0 l 5,-10 l 5,10 l 10,0 l -7,10 l 2,10 l -10,-5 l -10,5 l 2,-10 Z" />
+                StrokeThickness="{Binding Parent.StrokeThickness, ElementName=LayoutRoot}" 
+                StrokeLineJoin="{Binding Parent.StrokeLineJoin, ElementName=LayoutRoot}"
+                Data="M 2,12 l 10,0 l 5,-10 l 5,10 l 10,0 l -7,10 l 2,10 l -10,-5 l -10,5 l 2,-10 Z" />
         <!-- width and height of this star is 34-->
     </Canvas>
 </UserControl>

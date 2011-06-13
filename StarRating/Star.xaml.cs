@@ -65,5 +65,18 @@ namespace MarkHeath.StarRating
         }
 
         #endregion
+
+        #region StrokeLineJoinProperty
+        public static readonly DependencyProperty StrokeLineJoinProperty = DependencyProperty.Register(
+    "StrokeLineJoin", typeof(PenLineJoin),
+    typeof(Star), new PropertyMetadata(PenLineJoin.Round));
+
+        public PenLineJoin StrokeLineJoin
+        {
+            get { return (PenLineJoin)GetValue(StrokeLineJoinProperty); }
+            set { SetValue(StrokeLineJoinProperty, value); }
+        }
+
+        #endregion
     }
 }
