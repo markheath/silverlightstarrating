@@ -26,12 +26,6 @@ namespace MarkHeath.StarRating
 
             CreateStars();
 
-            
-
-            /*ColumnDefinition filler = new ColumnDefinition();
-            filler.Width = new GridLength(1, GridUnitType.Star);
-            this.LayoutRoot.ColumnDefinitions.Add(filler);
-            this.LayoutRoot.ShowGridLines = true;*/
             this.MouseEnter += new MouseEventHandler(StarRatingControl_MouseEnter);
             this.MouseMove += new MouseEventHandler(StarRatingControl_MouseMove);
             this.MouseLeave += new MouseEventHandler(StarRatingControl_MouseLeave);
@@ -77,7 +71,10 @@ namespace MarkHeath.StarRating
 
         void StarRatingControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.Rating = GetRatingFromPosition(e.GetPosition(this.LayoutRoot));
+            if (this.IsEnabled)
+            {
+                this.Rating = GetRatingFromPosition(e.GetPosition(this.LayoutRoot));
+            }
         }
 
         void StarRatingControl_MouseLeave(object sender, MouseEventArgs e)
@@ -103,10 +100,13 @@ namespace MarkHeath.StarRating
 
         private void HandleMouseOver(Point mousePos)
         {
-            this.IsHovering = IsInBounds(mousePos);
-            if (this.IsHovering)
+            if (this.IsEnabled) // no hover ratings if not enabled
             {
-                this.HoverRating = GetRatingFromPosition(mousePos);
+                this.IsHovering = IsInBounds(mousePos);
+                if (this.IsHovering)
+                {
+                    this.HoverRating = GetRatingFromPosition(mousePos);
+                }
             }
             /*else
             {
