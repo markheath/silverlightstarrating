@@ -60,6 +60,7 @@ namespace MarkHeath.StarRating
                 LayoutRoot.Children.Add(star);
                 this.stars.Add(star);
             }
+            RefreshStarRating();
         }
 
         void StarRatingControl_MouseEnter(object sender, MouseEventArgs e)

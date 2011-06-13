@@ -23,11 +23,11 @@
             <RowDefinition Height="98*" />
         </Grid.RowDefinitions>
         <TextBlock Margin="10,10,0,10" HorizontalAlignment="Left" Text="Default" VerticalAlignment="Center" />
-        <star:StarRatingControl Margin="5" HorizontalAlignment="Left" Width="170" Height="35" VerticalAlignment="Top" Grid.Column="1" />
+        <star:StarRatingControl Margin="5" Rating="9" HorizontalAlignment="Left" Width="170" Height="35" VerticalAlignment="Top" Grid.Column="1" />
         <TextBlock Margin="10,10,0,10" HorizontalAlignment="Left" Text="Small" VerticalAlignment="Center" Grid.Row="1"/>
-        <star:StarRatingControl Grid.Row="1" Margin="5,12,0,0" x:Name="starRatingControl1" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Width="76" Grid.Column="1" />
+        <star:StarRatingControl Grid.Row="1" Rating="3" Margin="5,12,0,0" x:Name="starRatingControl1" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Width="76" Grid.Column="1" />
         <TextBlock Margin="10,10,0,10" HorizontalAlignment="Left" Text="Large" VerticalAlignment="Center" Grid.Row="2"/>
-        <star:StarRatingControl Grid.Row="2" Height="67" HorizontalAlignment="Left" Margin="13,14,0,0" x:Name="starRatingControl2" VerticalAlignment="Top" Width="328" Grid.Column="1" />
+        <star:StarRatingControl Grid.Row="2" Rating="2" Height="67" HorizontalAlignment="Left" Margin="13,14,0,0" x:Name="starRatingControl2" VerticalAlignment="Top" Width="328" Grid.Column="1" />
         <TextBlock Margin="10,10,0,10" HorizontalAlignment="Left" Text="Disabled" VerticalAlignment="Center" Grid.Row="3"/>
         <star:StarRatingControl Margin="5" HorizontalAlignment="Left" Width="170" Height="35" VerticalAlignment="Top" Grid.Column="1" Rating="7" Grid.Row="3" IsEnabled="False" 
                                 StarOutlineBrush="#C0C000" StarFillBrush="#FFFF80"/>
@@ -38,15 +38,16 @@
 
 
         <star:Star Grid.Row="6" HorizontalAlignment="Left" Margin="0,45,0,0" x:Name="star1" VerticalAlignment="Top" Height="53" Width="62" Grid.Column="1" />
-        <star:Star Grid.Row="6" Height="34" HorizontalAlignment="Left" Margin="156,0,0,0" x:Name="star2" VerticalAlignment="Bottom" Width="34" StarFillBrush="Red" Foreground="Blue" HalfFillBrush="Green" Grid.Column="1" />
-        <star:Star Grid.Row="6" Height="87" HorizontalAlignment="Left" Margin="68,0,0,0" x:Name="star3" VerticalAlignment="Bottom" Width="82" HalfFillBrush="{x:Null}" Grid.Column="1" />
-        <star:Star Grid.Row="6" HorizontalAlignment="Left" Margin="196,0,0,-2" x:Name="star4" VerticalAlignment="Bottom" Height="34" Width="24" Grid.Column="1" />
+        <star:Star Grid.Row="6" Height="34" HorizontalAlignment="Left" Margin="156,0,0,53" x:Name="star2" VerticalAlignment="Bottom" Width="34" StarFillBrush="Red" Foreground="Blue" HalfFillBrush="Green" Grid.Column="1" />
+        <star:Star Foreground="#0000C0" StarFillBrush="#8080C0" Grid.Row="6" Height="87" HorizontalAlignment="Left" Margin="68,0,0,0" x:Name="star3" VerticalAlignment="Bottom" Width="82" HalfFillBrush="{x:Null}" Grid.Column="1" />
+        <star:Star Grid.Row="6" HorizontalAlignment="Left" Margin="166,0,0,0" x:Name="star4" VerticalAlignment="Bottom" Height="34" Width="24" Grid.Column="1" />
         <star:Star Grid.Column="1" Grid.Row="6" Height="89" HorizontalAlignment="Left" Margin="248,11,0,0" Name="star5" VerticalAlignment="Top" Width="82" StrokeThickness="5" StarFillBrush="Bisque" />
         <star:Star Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" Margin="336,11,0,0" Name="star6" VerticalAlignment="Top" StrokeThickness="1" Height="75" Width="72" />
         <star:Star Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" Margin="426,0,0,0" Name="star7" VerticalAlignment="Top" Height="69" Width="64" Foreground="{x:Null}" StarFillBrush="Red" />
-        <star:StarRatingControl Grid.Column="1" Grid.Row="1" Height="34" HorizontalAlignment="Left" Margin="196,2,0,0" Name="starRatingControl3" VerticalAlignment="Top" Width="170" NumberOfStars="7" />
-        <star:StarRatingControl Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" Height="78" HorizontalAlignment="Left" Margin="238,23,0,0" Name="starRatingControl4" VerticalAlignment="Top" Width="142" NumberOfStars="2"  Rating="3" 
-                                StrokeThickness="5" StrokeLineJoin="Miter" StarOutlineBrush="#00C000" StarFillBrush="#80FF80" />
+        <star:StarRatingControl Grid.Column="1" Rating="10" Grid.Row="1" Height="34" HorizontalAlignment="Left" Margin="196,2,0,0" Name="starRatingControl3" VerticalAlignment="Top" Width="170" NumberOfStars="7" />
+        <star:StarRatingControl Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" Height="78" HorizontalAlignment="Left" Margin="238,23,0,0" Name="starRatingControl4" VerticalAlignment="Top" Width="200" NumberOfStars="3" Rating="3" 
+                                StrokeThickness="4" StrokeLineJoin="Miter" StarOutlineBrush="#00C000" StarFillBrush="#80FF80" />
         <TextBlock Grid.Column="1" Grid.Row="3" Height="23" HorizontalAlignment="Left" Margin="238,5,0,0" Name="textBlock1" Text="StrokeThickness and StrokeLineJoin" VerticalAlignment="Top" />
+        <TextBlock Grid.Row="6" Height="23" HorizontalAlignment="Left" Margin="11,51,0,0" Name="textBlock2" Text="Star Control" VerticalAlignment="Top" />
     </Grid>
 </UserControl>
