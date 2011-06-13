@@ -206,6 +206,25 @@ namespace MarkHeath.StarRating
         }
         #endregion
 
+        #region UnselectedStarFillBrushProperty
+        public static readonly DependencyProperty UnselectedStarFillBrushProperty = DependencyProperty.Register(
+    "UnselectedStarFillBrush", typeof(Brush),
+    typeof(StarRatingControl), new PropertyMetadata(null,
+        new PropertyChangedCallback(UnselectedStarFillBrushChanged)));
+
+        public Brush UnselectedStarFillBrush
+        {
+            get { return (Brush)GetValue(UnselectedStarFillBrushProperty); }
+            set { SetValue(UnselectedStarFillBrushProperty, value); }
+        }
+
+        private static void UnselectedStarFillBrushChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+        {
+            var starRating = (StarRatingControl)sender;
+            starRating.RefreshStarRating();
+        }
+        #endregion
+
         #region StarOutlineBrushProperty
         public static readonly DependencyProperty StarOutlineBrushProperty = DependencyProperty.Register(
     "StarOutlineBrush", typeof(Brush),
@@ -244,6 +263,26 @@ namespace MarkHeath.StarRating
         }
         #endregion
 
+        #region UnselectedHoverFillBrushProperty
+        public static readonly DependencyProperty UnselectedHoverFillBrushProperty = DependencyProperty.Register(
+    "UnselectedHoverFillBrush", typeof(Brush),
+    typeof(StarRatingControl), new PropertyMetadata(null,
+        new PropertyChangedCallback(UnselectedHoverFillBrushChanged)));
+
+        public Brush UnselectedHoverFillBrush
+        {
+            get { return (Brush)GetValue(UnselectedHoverFillBrushProperty); }
+            set { SetValue(UnselectedHoverFillBrushProperty, value); }
+        }
+
+        private static void UnselectedHoverFillBrushChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+        {
+            var starRating = (StarRatingControl)sender;
+            starRating.RefreshStarRating();
+        }
+        #endregion
+
+
         #region HoverOutlineBrushProperty
         public static readonly DependencyProperty HoverOutlineBrushProperty = DependencyProperty.Register(
     "HoverOutlineBrush", typeof(Brush),
@@ -267,7 +306,7 @@ namespace MarkHeath.StarRating
         {
             if (isHovering)
             {
-                DrawStarRating(this.HoverRating, this.HoverFillBrush, this.HoverOutlineBrush);
+                DrawStarRating(this.HoverRating, this.HoverFillBrush, this.HoverOutlineBrush, this.UnselectedHoverFillBrush);
             }
             else
             {
@@ -277,10 +316,10 @@ namespace MarkHeath.StarRating
 
         private void DrawUnhovered()
         {
-            DrawStarRating(this.Rating, this.StarFillBrush, this.StarOutlineBrush);
+            DrawStarRating(this.Rating, this.StarFillBrush, this.StarOutlineBrush, this.UnselectedStarFillBrush);
         }
 
-        private void DrawStarRating(int value, Brush fillBrush, Brush outlineBrush)
+        private void DrawStarRating(int value, Brush fillBrush, Brush outlineBrush, Brush unselectedBrush)
         {
             //Debug.WriteLine("Value = {0}", value);
             for (int star = 0; star < NumberOfStars; star++)
@@ -292,12 +331,12 @@ namespace MarkHeath.StarRating
                 }
                 else if (value >= 1 + star * 2)
                 {
-                    stars[star].StarFillBrush = null;
+                    stars[star].StarFillBrush = unselectedBrush;
                     stars[star].HalfFillBrush = fillBrush;
                 }
                 else
                 {
-                    stars[star].StarFillBrush = null;
+                    stars[star].StarFillBrush = unselectedBrush;
                     stars[star].HalfFillBrush = null;
                 }
                 stars[star].Foreground = outlineBrush;
