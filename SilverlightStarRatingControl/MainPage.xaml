@@ -45,5 +45,8 @@
         <star:Star Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" Margin="336,11,0,0" Name="star6" VerticalAlignment="Top" StrokeThickness="1" Height="75" Width="72" />
         <star:Star Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" Margin="426,0,0,0" Name="star7" VerticalAlignment="Top" Height="69" Width="64" Foreground="{x:Null}" StarFillBrush="Red" />
         <star:StarRatingControl Grid.Column="1" Grid.Row="1" Height="34" HorizontalAlignment="Left" Margin="196,2,0,0" Name="starRatingControl3" VerticalAlignment="Top" Width="170" NumberOfStars="7" />
+        <star:StarRatingControl Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" Height="78" HorizontalAlignment="Left" Margin="238,23,0,0" Name="starRatingControl4" VerticalAlignment="Top" Width="142" NumberOfStars="2"  Rating="3" 
+                                StrokeThickness="5" StrokeLineJoin="Miter" StarOutlineBrush="#00C000" StarFillBrush="#80FF80" />
+        <TextBlock Grid.Column="1" Grid.Row="3" Height="23" HorizontalAlignment="Left" Margin="238,5,0,0" Name="textBlock1" Text="StrokeThickness and StrokeLineJoin" VerticalAlignment="Top" />
     </Grid>
 </UserControl>
