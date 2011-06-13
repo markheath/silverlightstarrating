@@ -46,6 +46,17 @@ namespace MarkHeath.StarRating
                 star.StarFillBrush = this.StarFillBrush;
                 star.Foreground = this.StarOutlineBrush;
                 star.SetValue(Grid.ColumnProperty, column);
+
+                Binding strokeThicknessBinding = new Binding();
+                strokeThicknessBinding.ElementName = "LayoutRoot";
+                strokeThicknessBinding.Path = new PropertyPath("Parent.StrokeThickness");
+                BindingOperations.SetBinding(star, Star.StrokeThicknessProperty, strokeThicknessBinding);
+
+                Binding lineJoinBinding = new Binding();
+                lineJoinBinding.ElementName = "LayoutRoot";
+                lineJoinBinding.Path = new PropertyPath("Parent.StrokeLineJoin");
+                BindingOperations.SetBinding(star, Star.StrokeLineJoinProperty, lineJoinBinding);
+
                 LayoutRoot.Children.Add(star);
                 this.stars.Add(star);
             }
@@ -282,7 +293,6 @@ namespace MarkHeath.StarRating
         }
         #endregion
 
-
         #region HoverOutlineBrushProperty
         public static readonly DependencyProperty HoverOutlineBrushProperty = DependencyProperty.Register(
     "HoverOutlineBrush", typeof(Brush),
@@ -300,6 +310,32 @@ namespace MarkHeath.StarRating
             var starRating = (StarRatingControl)sender;
             starRating.RefreshStarRating();
         }
+        #endregion
+
+        #region StrokeThicknessProperty
+        public static readonly DependencyProperty StrokeThicknessProperty = DependencyProperty.Register(
+    "StrokeThickness", typeof(double),
+    typeof(StarRatingControl), new PropertyMetadata(2.0));
+
+        public double StrokeThickness
+        {
+            get { return (double)GetValue(StrokeThicknessProperty); }
+            set { SetValue(StrokeThicknessProperty, value); }
+        }
+
+        #endregion
+
+        #region StrokeLineJoinProperty
+        public static readonly DependencyProperty StrokeLineJoinProperty = DependencyProperty.Register(
+    "StrokeLineJoin", typeof(PenLineJoin),
+    typeof(StarRatingControl), new PropertyMetadata(PenLineJoin.Round));
+
+        public PenLineJoin StrokeLineJoin
+        {
+            get { return (PenLineJoin)GetValue(StrokeLineJoinProperty); }
+            set { SetValue(StrokeLineJoinProperty, value); }
+        }
+
         #endregion
 
         private void RefreshStarRating()
