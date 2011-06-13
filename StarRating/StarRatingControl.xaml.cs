@@ -28,7 +28,7 @@ namespace MarkHeath.StarRating
             this.MouseEnter += new MouseEventHandler(StarRatingControl_MouseEnter);
             this.MouseMove += new MouseEventHandler(StarRatingControl_MouseMove);
             this.MouseLeave += new MouseEventHandler(StarRatingControl_MouseLeave);
-            this.MouseLeftButtonDown += new MouseButtonEventHandler(StarRatingControl_MouseLeftButtonDown);
+            this.MouseLeftButtonDown += new MouseButtonEventHandler(StarRatingControl_MouseLeftButtonDown);            
         }
 
         private void CreateStars()
@@ -44,6 +44,7 @@ namespace MarkHeath.StarRating
 
                 Star star = new Star();
                 star.StarFillBrush = this.StarFillBrush;
+                star.Foreground = this.StarOutlineBrush;
                 star.SetValue(Grid.ColumnProperty, column);
                 LayoutRoot.Children.Add(star);
                 this.stars.Add(star);
@@ -205,6 +206,25 @@ namespace MarkHeath.StarRating
         }
         #endregion
 
+        #region StarOutlineBrushProperty
+        public static readonly DependencyProperty StarOutlineBrushProperty = DependencyProperty.Register(
+    "StarOutlineBrush", typeof(Brush),
+    typeof(StarRatingControl), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xFF, 0xC0, 0xC0, 0)),
+        new PropertyChangedCallback(StarFillBrushChanged)));
+
+        public Brush StarOutlineBrush
+        {
+            get { return (Brush)GetValue(StarOutlineBrushProperty); }
+            set { SetValue(StarOutlineBrushProperty, value); }
+        }
+
+        private static void StarOutlineBrushChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+        {
+            var starRating = (StarRatingControl)sender;
+            starRating.RefreshStarRating();
+        }
+        #endregion
+
         #region HoverFillBrushProperty
         public static readonly DependencyProperty HoverFillBrushProperty = DependencyProperty.Register(
     "HoverFillBrush", typeof(Brush),
@@ -257,7 +277,7 @@ namespace MarkHeath.StarRating
 
         private void DrawUnhovered()
         {
-            DrawStarRating(this.Rating, this.StarFillBrush, this.Foreground);
+            DrawStarRating(this.Rating, this.StarFillBrush, this.StarOutlineBrush);
         }
 
         private void DrawStarRating(int value, Brush fillBrush, Brush outlineBrush)
