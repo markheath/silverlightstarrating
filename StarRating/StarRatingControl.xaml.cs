@@ -247,7 +247,7 @@ namespace MarkHeath.StarRating
         #region HoverFillBrushProperty
         public static readonly DependencyProperty HoverFillBrushProperty = DependencyProperty.Register(
     "HoverFillBrush", typeof(Brush),
-    typeof(StarRatingControl), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFF, 0x80)),
+    typeof(StarRatingControl), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xFF, 0xF0, 0xF0, 0x80)),
         new PropertyChangedCallback(HoverFillBrushChanged)));
 
         public Brush HoverFillBrush
@@ -286,7 +286,7 @@ namespace MarkHeath.StarRating
         #region HoverOutlineBrushProperty
         public static readonly DependencyProperty HoverOutlineBrushProperty = DependencyProperty.Register(
     "HoverOutlineBrush", typeof(Brush),
-    typeof(StarRatingControl), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xFF, 0x80, 0x80, 0x80)),
+    typeof(StarRatingControl), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xFF, 0xA0, 0xA0, 0x00)),
         new PropertyChangedCallback(HoverOutlineBrushChanged)));
 
         public Brush HoverOutlineBrush
