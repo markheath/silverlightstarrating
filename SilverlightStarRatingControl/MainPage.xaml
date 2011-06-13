@@ -32,7 +32,7 @@
         <star:StarRatingControl Margin="5" HorizontalAlignment="Left" Width="170" Height="35" VerticalAlignment="Top" Grid.Column="1" Rating="7" Grid.Row="3" IsEnabled="False" />
         <TextBlock HorizontalAlignment="Left" Margin="10" Text="Custom Colours" VerticalAlignment="Center" Grid.Row="4" />
         <star:StarRatingControl Margin="5" HorizontalAlignment="Left" Width="170" Height="35" VerticalAlignment="Top" Grid.Column="1" Grid.Row="4"
-                                Foreground="#C00000" StarFillBrush="#FF8080" HoverFillBrush="#8080FF" HoverOutlineBrush="#0000C0" Rating="7" />
+                                StarOutlineBrush="#C00000" StarFillBrush="#FF8080" HoverFillBrush="#8080FF" HoverOutlineBrush="#0000C0" Rating="7" />
 
 
         <star:Star Grid.Row="6" HorizontalAlignment="Left" Margin="0,45,0,0" x:Name="star1" VerticalAlignment="Top" Height="53" Width="62" Grid.Column="1" />
