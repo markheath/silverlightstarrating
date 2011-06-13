@@ -23,8 +23,7 @@ namespace MarkHeath.StarRating
         public StarRatingControl()
         {
             InitializeComponent();
-
-            CreateStars();
+            CreateStars();            
 
             this.MouseEnter += new MouseEventHandler(StarRatingControl_MouseEnter);
             this.MouseMove += new MouseEventHandler(StarRatingControl_MouseMove);
@@ -124,7 +123,7 @@ namespace MarkHeath.StarRating
                     this.isHovering = value;
                     if (!isHovering)
                     {
-                        DrawStarRating(Rating, this.StarFillBrush);
+                        DrawUnhovered();
                     }
                 }
             }
@@ -165,7 +164,7 @@ namespace MarkHeath.StarRating
         private static void OnRatingChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
             var src = (StarRatingControl)sender;
-            src.DrawStarRating((int)args.NewValue, src.StarFillBrush);
+            src.DrawUnhovered();
         }
         #endregion
 
@@ -183,7 +182,7 @@ namespace MarkHeath.StarRating
         private static void OnHoverRatingChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
             var src = (StarRatingControl)sender;
-            src.DrawStarRating((int)args.NewValue, src.HoverFillBrush);
+            src.RefreshStarRating();
         }
         #endregion
 
@@ -225,19 +224,43 @@ namespace MarkHeath.StarRating
         }
         #endregion
 
+        #region HoverOutlineBrushProperty
+        public static readonly DependencyProperty HoverOutlineBrushProperty = DependencyProperty.Register(
+    "HoverOutlineBrush", typeof(Brush),
+    typeof(StarRatingControl), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xFF, 0x80, 0x80, 0x80)),
+        new PropertyChangedCallback(HoverOutlineBrushChanged)));
+
+        public Brush HoverOutlineBrush
+        {
+            get { return (Brush)GetValue(HoverOutlineBrushProperty); }
+            set { SetValue(HoverOutlineBrushProperty, value); }
+        }
+
+        private static void HoverOutlineBrushChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+        {
+            var starRating = (StarRatingControl)sender;
+            starRating.RefreshStarRating();
+        }
+        #endregion
+
         private void RefreshStarRating()
         {
             if (isHovering)
             {
-                DrawStarRating(this.HoverRating, this.HoverFillBrush);
+                DrawStarRating(this.HoverRating, this.HoverFillBrush, this.HoverOutlineBrush);
             }
             else
             {
-                DrawStarRating(this.Rating, this.StarFillBrush);
+                DrawUnhovered();
             }
         }
 
-        private void DrawStarRating(int value, Brush fillBrush)
+        private void DrawUnhovered()
+        {
+            DrawStarRating(this.Rating, this.StarFillBrush, this.Foreground);
+        }
+
+        private void DrawStarRating(int value, Brush fillBrush, Brush outlineBrush)
         {
             //Debug.WriteLine("Value = {0}", value);
             for (int star = 0; star < NumberOfStars; star++)
@@ -257,7 +280,7 @@ namespace MarkHeath.StarRating
                     stars[star].StarFillBrush = null;
                     stars[star].HalfFillBrush = null;
                 }
-                stars[star].Foreground = (IsHovering) ? new SolidColorBrush(Color.FromArgb(0xff, 0x80, 0x80, 0x80)) : this.Foreground;
+                stars[star].Foreground = outlineBrush;
             }
         }
     }
