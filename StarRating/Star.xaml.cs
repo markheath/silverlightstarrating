@@ -30,8 +30,7 @@ namespace MarkHeath.StarRating
         #region StarFillBrushProperty
         public static readonly DependencyProperty StarFillBrushProperty = DependencyProperty.Register(
     "StarFillBrush", typeof(Brush),
-    typeof(Star), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xFF, 0xC0, 0xC0, 0xC0)),
-        new PropertyChangedCallback(StarFillBrushChanged)));
+    typeof(Star), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFF, 0x80))));
 
         public Brush StarFillBrush
         {
@@ -39,17 +38,12 @@ namespace MarkHeath.StarRating
             set { SetValue(StarFillBrushProperty, value); }
         }
 
-        private static void StarFillBrushChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
-        {
-
-        }
         #endregion
 
         #region HalfFillBrushProperty
         public static readonly DependencyProperty HalfFillBrushProperty = DependencyProperty.Register(
     "HalfFillBrush", typeof(Brush),
-    typeof(Star), new PropertyMetadata(null,
-        new PropertyChangedCallback(HalfFillBrushChanged)));
+    typeof(Star), new PropertyMetadata(null));
 
         public Brush HalfFillBrush
         {
@@ -57,10 +51,19 @@ namespace MarkHeath.StarRating
             set { SetValue(HalfFillBrushProperty, value); }
         }
 
-        private static void HalfFillBrushChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
-        {
+        #endregion
 
+        #region StrokeThicknessProperty
+        public static readonly DependencyProperty StrokeThicknessProperty = DependencyProperty.Register(
+    "StrokeThickness", typeof(double),
+    typeof(Star), new PropertyMetadata(2.0));
+
+        public double StrokeThickness
+        {
+            get { return (double)GetValue(StrokeThicknessProperty); }
+            set { SetValue(StrokeThicknessProperty, value); }
         }
+
         #endregion
     }
 }
