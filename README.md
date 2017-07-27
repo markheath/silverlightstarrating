@@ -2,7 +2,7 @@
 
 A simple star rating control for editing or displaying ratings in Silverlight. Supports half-filled stars. Includes the star shape as a separate control.
 
-![](Home_StarRating.png)
+![star rating control screenshot](https://github.com/markheath/silverlightstarrating/blob/master/Home_StarRating.PNG?raw=true)
 
 **Features:**
 
